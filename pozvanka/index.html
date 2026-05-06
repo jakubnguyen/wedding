@@ -35,16 +35,14 @@
 
     /* ── PALETTE ── */
     :root {
-      --p1: #f08498;
-      --p2: #d4377a;
-      --p3: #8e6882;
-      --p4: #b0a0cc;
-      --p5: #bec8dc;
-      --p6: #6494c4;
-      --p7: #7bbfa0;
+      --p1: #F4AD73;
+      --p2: #F594A3;
+      --p3: #DC6594;
+      --p4: #D6C2E6;
+      --p5: #9DCDEB;
+      --p6: #9ECFC6;
 
-      --accent:  #d4377a;
-      --blue:    #6494c4;
+      --accent:  #DC6594;
       --dark:    #1e1220;
       --text:    #2e2030;
       --muted:   #8a7a8a;
@@ -125,7 +123,7 @@
       height: 6px; z-index: 101;
       background: linear-gradient(90deg,
         var(--p1), var(--p2), var(--p3),
-        var(--p4), var(--p5), var(--p6), var(--p7));
+        var(--p4), var(--p5), var(--p6));
       background-color: #ebe1dc;
       opacity: 1;
     }
@@ -215,8 +213,8 @@
       position: absolute; bottom: 0; left: 0; right: 0;
       height: 7px;
       background: linear-gradient(90deg,
-        var(--p1) 0%, var(--p2) 17%, var(--p3) 34%,
-        var(--p4) 51%, var(--p5) 68%, var(--p6) 85%, var(--p7) 100%);
+        var(--p1) 0%, var(--p2) 20%, var(--p3) 40%,
+        var(--p4) 60%, var(--p5) 80%, var(--p6) 100%);
     }
     .hero-eyebrow {
       font-size: clamp(1.5rem, 4.5vw, 2.2rem);
@@ -455,8 +453,8 @@
     .footer-stripe {
       height: 5px;
       background: linear-gradient(90deg,
-        var(--p1) 0%, var(--p2) 17%, var(--p3) 34%,
-        var(--p4) 51%, var(--p5) 68%, var(--p6) 85%, var(--p7) 100%);
+        var(--p1) 0%, var(--p2) 20%, var(--p3) 40%,
+        var(--p4) 60%, var(--p5) 80%, var(--p6) 100%);
     }
   </style>
 </head>
@@ -526,13 +524,12 @@
         Hlavní ale je, abyste přišli v tom, v čem se budete cítit dobře 😊
       </p>
       <div class="color-palette reveal d2">
-        <div class="color-swatch" style="background:#f08498"></div>
-        <div class="color-swatch" style="background:#d4377a"></div>
-        <div class="color-swatch" style="background:#8e6882"></div>
-        <div class="color-swatch" style="background:#b0a0cc"></div>
-        <div class="color-swatch" style="background:#bec8dc"></div>
-        <div class="color-swatch" style="background:#6494c4"></div>
-        <div class="color-swatch" style="background:#7bbfa0"></div>
+        <div class="color-swatch" style="background:#F4AD73"></div>
+        <div class="color-swatch" style="background:#F594A3"></div>
+        <div class="color-swatch" style="background:#DC6594"></div>
+        <div class="color-swatch" style="background:#D6C2E6"></div>
+        <div class="color-swatch" style="background:#9DCDEB"></div>
+        <div class="color-swatch" style="background:#9ECFC6"></div>
       </div>
     </div>
   </section>
@@ -597,7 +594,7 @@
     });
 
     // ── SCROLL-REACTIVE AMPERSAND (cycles full palette ×2)
-    const palette = ['#f08498','#d4377a','#8e6882','#b0a0cc','#bec8dc','#6494c4','#7bbfa0'];
+    const palette = ['#F4AD73','#F594A3','#DC6594','#D6C2E6','#9DCDEB','#9ECFC6'];
     const stops = [...palette, ...palette, palette[0]]; // 15 stops = 2 full loops
     const hexToRgb = h => [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
     const lerp = (a,b,t) => a + (b - a) * t;
