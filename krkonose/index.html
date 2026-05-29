@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Špindl Trail Guide — 30.5–1.6.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,300;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:        #F3EEE2;
+  --cream-deep:   #EDE7D5;
+  --forest:       #182D1F;
+  --forest-mid:   #2A4A35;
+  --forest-light: #3D6B50;
+  --sage:         #7A9E87;
+  --amber:        #C2790A;
+  --amber-bright: #E8A020;
+  --stone:        #6B7B6D;
+  --snow:         #FDFAF4;
+  --sky:          #3E7A9E;
+  --rain:         #5B7FA0;
+  --terracotta:   #BE4A18;
+  --line:         rgba(24,45,31,0.10);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--forest);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: var(--forest);
+  padding: 36px 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 80% at 80% -20%, rgba(61,107,80,0.45) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 14vw, 96px);
+  font-weight: 700;
+  line-height: 0.88;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--amber-bright);
+}
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(243,238,226,0.65);
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+}
+.hero-tagline strong { color: rgba(243,238,226,0.9); font-weight: 500; }
+
+/* mountain SVG */
+.hero-mountains {
+  width: 100%;
+  display: block;
+  margin-bottom: -2px;
+}
+
+/* ── WEATHER STRIP ───────────────────────────────── */
+.weather-strip {
+  background: var(--forest-mid);
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.weather-strip::-webkit-scrollbar { display: none; }
+
+.w-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 80px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.w-day.sunny  { background: rgba(194,121,10,0.22); border-color: rgba(232,160,32,0.4); }
+.w-day.rainy  { background: rgba(62,122,158,0.22); border-color: rgba(91,127,160,0.4); }
+.w-day.cloudy { background: rgba(122,158,135,0.15); border-color: rgba(122,158,135,0.3); }
+
+.w-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243,238,226,0.6); }
+.w-icon  { font-size: 24px; }
+.w-temp  { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: #F3EEE2; }
+.w-cond  { font-size: 10px; color: rgba(243,238,226,0.55); text-align: center; }
+
+/* ── DONE-LIST ───────────────────────────────────── */
+.done-wrap {
+  padding: 18px 20px 0;
+  max-width: 660px;
+  margin: 0 auto;
+}
+.done-box {
+  background: rgba(24,45,31,0.05);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.done-box h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 10px;
+}
+.done-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.done-tag {
+  background: rgba(24,45,31,0.07);
+  border: 1px solid var(--line);
+  color: var(--stone);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-decoration: line-through;
+  text-decoration-color: var(--sage);
+}
+
+/* ── TAB NAV ─────────────────────────────────────── */
+.tab-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--snow);
+  border-bottom: 2px solid var(--line);
+  display: flex;
+  padding: 0 8px;
+  box-shadow: 0 2px 12px rgba(24,45,31,0.08);
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 4px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+  position: relative;
+  transition: color 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.tab-btn .t-emoji { font-size: 18px; }
+.tab-btn.active { color: var(--forest); }
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 8px; right: 8px;
+  height: 2px;
+  background: var(--amber);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ── TAB CONTENT ─────────────────────────────────── */
+.tab-pane { display: none; padding: 22px 18px 40px; max-width: 660px; margin: 0 auto; }
+.tab-pane.active { display: block; }
+
+/* day header */
+.day-hdr h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.day-hdr .day-sub { font-size: 12.5px; color: var(--stone); margin-bottom: 12px; }
+.banner {
+  padding: 9px 13px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
+  margin-bottom: 4px;
+}
+.banner-sun  { background: rgba(61,107,80,0.10); color: #1E4A2C; border-left: 3px solid var(--forest-light); }
+.banner-rain { background: rgba(62,122,158,0.10); color: #1C3D58; border-left: 3px solid var(--sky); }
+.banner-ok   { background: rgba(194,121,10,0.09); color: #6B4000; border-left: 3px solid var(--amber); }
+
+/* section label */
+.sec-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 22px 0 10px;
+}
+
+/* ── ROUTE CARDS ─────────────────────────────────── */
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(24,45,31,0.05);
+}
+.card.top {
+  border: 2px solid var(--amber);
+  background: linear-gradient(140deg, #FFFDF7 0%, #FFF7E6 100%);
+}
+.card.rain-opt {
+  border: 1.5px solid rgba(62,122,158,0.4);
+  background: linear-gradient(140deg, #FAFDFF 0%, #F2F8FC 100%);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 10px;
+}
+.rank-badge {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.r1 { background: var(--amber); color: white; }
+.r2 { background: var(--forest-light); color: white; }
+.r3 { background: var(--stone); color: white; }
+.rw { background: var(--sky); color: white; }
+.rs { background: var(--sage); color: white; }
+
+.card-titles h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--forest);
+}
+.card-titles .csub {
+  font-size: 12px;
+  color: var(--stone);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.chip {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--forest-mid);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.steps { list-style: none; padding: 0; margin: 0 0 10px; }
+.steps li {
+  font-size: 13.5px;
+  color: #2E4A35;
+  padding: 7px 0 7px 22px;
+  position: relative;
+  border-bottom: 1px solid rgba(24,45,31,0.06);
+  line-height: 1.5;
+}
+.steps li:last-child { border-bottom: none; }
+.steps li::before {
+  content: '→';
+  position: absolute;
+  left: 0; top: 7px;
+  color: var(--amber);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.body-text {
+  font-size: 13.5px;
+  color: #2E4A35;
+  line-height: 1.65;
+}
+.body-text p { margin-bottom: 8px; }
+.body-text p:last-child { margin-bottom: 0; }
+
+.note {
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  font-size: 12.5px;
+  font-weight: 400;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.note-green {
+  background: rgba(61,107,80,0.08);
+  border-left: 3px solid var(--sage);
+  color: var(--forest-mid);
+}
+.note-red {
+  background: rgba(190,74,24,0.08);
+  border-left: 3px solid var(--terracotta);
+  color: var(--terracotta);
+  font-weight: 500;
+}
+.note-blue {
+  background: rgba(62,122,158,0.08);
+  border-left: 3px solid var(--sky);
+  color: #1C3D58;
+}
+
+/* ── TIPS GRID ───────────────────────────────────── */
+.tips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.tip-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+.tip-card h4 {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 9px;
+}
+.tip-card ul { padding-left: 14px; }
+.tip-card li { font-size: 12.5px; color: #2E4A35; margin-bottom: 5px; line-height: 1.45; }
+.tip-card p  { font-size: 12.5px; color: #2E4A35; line-height: 1.5; }
+
+/* logistics block */
+.logistics {
+  background: var(--forest);
+  color: var(--cream);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 16px;
+}
+.logistics h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--amber-bright);
+}
+.logistics .log-day {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.logistics .log-day:last-child { margin-bottom: 0; }
+.log-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.log-day strong { color: var(--amber-bright); display: block; margin-bottom: 2px; }
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+  background: var(--forest);
+  text-align: center;
+  padding: 20px;
+  font-size: 11px;
+  color: rgba(243,238,226,0.45);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 480px) {
+  .tips-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 54px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">🏔 Krkonoše · Špindlerův Mlýn · 30. 5. – 1. 6. 2026</div>
+  <h1>Špindl<br><em>Trail</em><br>Guide</h1>
+  <div class="hero-tagline"><strong>OREA Resort Horal</strong> &nbsp;·&nbsp; Jakub + Simča &nbsp;·&nbsp; 3 dny</div>
+
+  <svg class="hero-mountains" viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <!-- distant ridge -->
+    <polygon points="0,160 0,100 40,78 80,90 120,62 170,75 210,48 255,68 300,38 345,58 390,32 435,55 475,30 520,52 560,28 610,50 650,35 700,55 740,42 800,60 800,160"
+             fill="rgba(74,122,97,0.25)"/>
+    <!-- mid ridge -->
+    <polygon points="0,160 0,115 25,105 60,88 100,100 140,75 175,92 215,65 255,82 295,55 340,73 375,50 415,70 455,45 500,68 535,48 570,72 608,52 645,70 685,55 730,78 770,62 800,75 800,160"
+             fill="rgba(42,74,53,0.55)"/>
+    <!-- front ridge -->
+    <polygon points="0,160 0,130 30,122 65,108 95,118 130,100 160,112 195,95 230,108 265,88 300,102 335,85 368,100 400,82 435,98 468,80 502,96 535,82 568,100 600,88 635,105 670,92 710,108 750,95 800,108 800,160"
+             fill="rgba(24,45,31,0.85)"/>
+    <!-- snow caps -->
+    <polygon points="298,102 305,88 312,102 307,89 301,101" fill="rgba(243,238,226,0.7)"/>
+    <polygon points="399,83 406,69 413,83 408,70 403,82" fill="rgba(243,238,226,0.65)"/>
+    <polygon points="473,81 480,68 487,81 482,69 476,80" fill="rgba(243,238,226,0.55)"/>
+    <polygon points="558,83 565,70 572,83 567,71 562,82" fill="rgba(243,238,226,0.4)"/>
+    <!-- stars -->
+    <circle cx="120" cy="22" r="1.5" fill="rgba(232,160,32,0.6)"/>
+    <circle cx="250" cy="15" r="1"   fill="rgba(232,160,32,0.5)"/>
+    <circle cx="380" cy="10" r="1.5" fill="rgba(232,160,32,0.7)"/>
+    <circle cx="520" cy="18" r="1"   fill="rgba(232,160,32,0.5)"/>
+    <circle cx="650" cy="12" r="1.5" fill="rgba(232,160,32,0.4)"/>
+  </svg>
+</div>
+
+<!-- ═══ WEATHER STRIP ════════════════════════════════ -->
+<div class="weather-strip">
+  <div class="w-day sunny">
+    <span class="w-label">Pá 30/5</span>
+    <span class="w-icon">☀️</span>
+    <span class="w-temp">20°C</span>
+    <span class="w-cond">Jasno · 0%</span>
+  </div>
+  <div class="w-day rainy">
+    <span class="w-label">So 31/5</span>
+    <span class="w-icon">🌧️</span>
+    <span class="w-temp">18°C</span>
+    <span class="w-cond">Déšť · 70%</span>
+  </div>
+  <div class="w-day cloudy">
+    <span class="w-label">Ne 1/6</span>
+    <span class="w-icon">🌤️</span>
+    <span class="w-temp">20°C</span>
+    <span class="w-cond">Polojasno · 10%</span>
+  </div>
+</div>
+
+<!-- ═══ ALREADY DONE ════════════════════════════════ -->
+<div class="done-wrap">
+  <div class="done-box">
+    <h4>✓ Přeskakujeme — to vše máte za sebou</h4>
+    <div class="done-tags">
+      <span class="done-tag">Sněžka (3×)</span>
+      <span class="done-tag">Luční bouda</span>
+      <span class="done-tag">Labská bouda</span>
+      <span class="done-tag">Labský důl</span>
+      <span class="done-tag">Pramen Labe</span>
+      <span class="done-tag">Vrbatova bouda</span>
+      <span class="done-tag">Harrachovy kameny</span>
+      <span class="done-tag">Mumlavský vodopád</span>
+      <span class="done-tag">Kozí hřbety</span>
+      <span class="done-tag">Dívčí kameny</span>
+      <span class="done-tag">Růžová hora</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB NAV ══════════════════════════════════════ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('friday', this)">
+    <span class="t-emoji">☀️</span>Pátek
+  </button>
+  <button class="tab-btn" onclick="showTab('saturday', this)">
+    <span class="t-emoji">🌧️</span>Sobota
+  </button>
+  <button class="tab-btn" onclick="showTab('sunday', this)">
+    <span class="t-emoji">🌤️</span>Neděle
+  </button>
+  <button class="tab-btn" onclick="showTab('tips', this)">
+    <span class="t-emoji">📋</span>Tipy
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     PÁTEK
+═══════════════════════════════════════════════════ -->
+<div id="tab-friday" class="tab-pane active">
+  <div class="day-hdr">
+    <h2>Pátek 30. května</h2>
+    <div class="day-sub">Výjezd ráno z Prahy · nemusíte hned do Špindlu · nejlepší den tripu</div>
+    <div class="banner banner-sun">☀️ Zlatý den — jasno, nula srážek, ~20°C. Využijte naplno na velký hike.</div>
+  </div>
+
+  <div class="sec-label">★ Top doporučení</div>
+
+  <!-- CARD 1: Hardcore okruh -->
+  <div class="card top">
+    <div class="card-head">
+      <div class="rank-badge r1">1</div>
+      <div class="card-titles">
+        <h3>Obří důl → Samotnia → Svorová hora</h3>
+        <div class="csub">Česká divočina + polská ledovcová jezera + kamenitý hřeben — nejlepší Krkonoše v jednom dni</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~22 km</span>
+      <span class="chip">⬆️ 1 100 m</span>
+      <span class="chip">⏱ 6–7 h</span>
+      <span class="chip">🔴 Náročná</span>
+      <span class="chip">🚗 Start: Pec pod Sněžkou</span>
+    </div>
+    <ol class="steps">
+      <li><strong>Obří důl (modrá)</strong> — Nejkrásnější údolí v Česku. Stoupáte podél Úpy pod monumentálními severními srázy Studniční hory — lavinová „Mapa republiky" nad vámi. Výstup k Obřímu sedlu, Slezský dům na hranici.</li>
+      <li><strong>Slezský dům → Samotnia (polská strana)</strong> — Hned za Slezským domem kamenitá cesta dolů do ledovcového kotle. Čekají vás <em>Wielki Staw</em> + <em>Mały Staw</em> — dvě obří ledovcová jezera s alpským charakterem. Historická dřevěná <strong>bouda Samotnia</strong> vklíněná mezi hladinu a skalní stěnu. Z české strany nic podobného neexistuje.</li>
+      <li><strong>Strzecha Akademicka → Słonecznik</strong> — Výstup zpět na hřeben kolem druhé polské boudy, k mohutné žulové skále <em>Słonecznik</em> (Polední kámen) s výhledem na Karpacz.</li>
+      <li><strong>Sněžka — přejít nebo traverzovat</strong> — Pokud nechcete potřetí na vrchol, jantarová cesta po polské straně elegantně obchází vrchol.</li>
+      <li><strong>Obří hřeben → Svorová hora (Czarna Kopa)</strong> — Otevřený kamenitý hřeben, nízká kleč, dlážděný chodník plochými balvany. Výhledy strmě dolů do Karpacze na PL straně a hluboko do Obřího dolu na CZ. Vzdušnější a horštější než dálnice od Luční boudy.</li>
+      <li><strong>Sestup přes Jelenku → Pec</strong> — Historická bouda Jelenka = povinná stopka. Po zelené (Richterovy boudy) zpět k autu.</li>
+    </ol>
+    <div class="note note-green">🍺 <strong>Bouda Jelenka</strong> — borůvkový koláč a pivo po sestupu. Neměnit za nic.</div>
+    <div class="note note-red">⚠️ Sezónní uzavírky polských tras formálně do 31.5. — hlavní cesty (Samotnia, Slezský dům) jsou obvykle průchozí, ověřte na místě nebo na <em>piekarkonosze.pl</em>.</div>
+  </div>
+
+  <!-- CARD 2: Svorová hora alternativa -->
+  <div class="sec-label">Alternativy</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge r2">2</div>
+      <div class="card-titles">
+        <h3>Svorová hora → Obří hřeben → Sněžka</h3>
+        <div class="csub">Alternativní Sněžka po nové trase — kamenitější, horštější než Luční bouda</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~15.5 km</span>
+      <span class="chip">⬆️ ~800 m</span>
+      <span class="chip">⏱ 4–5 h</span>
+      <span class="chip">🟠 Střední/náročná</span>
+      <span class="chip">🚗 Start: Horní Malá Úpa / Pomezní boudy</span>
+    </div>
+    <div class="body-text">
+      <p>Z Horní Malé Úpy přes <strong>Soví sedlo → Jelenku → Svorovou horu → Obří hřeben</strong> na Sněžku. Tento úsek hřebene je kamenitý, méně pohodlný, ale s monumentálními výhledy na obě strany — jiný zážitek než klasika od Luční boudy. Okruh zpět přes Růžovou horu / Pomezky.</p>
+    </div>
+    <div class="note note-green">✓ Dobrá volba pokud chcete Sněžku ještě jednou, ale po jiné trase s opravdovým horským charakterem.</div>
+  </div>
+
+  <!-- CARD 3: Rýchory -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge r3">3</div>
+      <div class="card-titles">
+        <h3>Rýchory + Dvorský les</h3>
+        <div class="csub">Tichý prales, KRNAP core zone, žádné davy — úplně jiný charakter Krkonoš</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~19 km</span>
+      <span class="chip">⬆️ ~590 m</span>
+      <span class="chip">⏱ 5–6 h</span>
+      <span class="chip">🟡 Střední</span>
+      <span class="chip">🚗 Start: Žacléř / Horní Maršov</span>
+    </div>
+    <div class="body-text">
+      <p>Přírodní rezervace Rýchory — lesnaté, skoro pralesní partie KRNAP. Naučná stezka přes <strong>Rýchorskou boudu</strong>, Maxovku, Rýchorskou studánku a <strong>Dvorský les</strong>: starý bukový prales s obrovskými kmeny, naprostý klid, žádní turisté. Úplně jiný charakter než hřebenové výhledy — pro vás jako „nový must-have" Krkonoš.</p>
+      <p><em>Logistika:</em> přidejte cestou z Prahy přes Trutnov → Horní Maršov → Žacléř, pak přejet do Špindlu.</p>
+    </div>
+    <div class="note note-green">🌲 Nejlepší pokud chcete objevit Krkonoše mimo Sněžkový okruh — hike jako v Bavorském lese, ale v Česku.</div>
+  </div>
+
+  <!-- CARD 4: Modrý důl -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge r3">4</div>
+      <div class="card-titles">
+        <h3>Modrý důl → Výrovka</h3>
+        <div class="csub">Klidné velké krkonošské údolí — silný vibe bez davů na Sněžce</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~14 km</span>
+      <span class="chip">⬆️ ~650 m</span>
+      <span class="chip">⏱ ~4 h</span>
+      <span class="chip">🟡 Střední</span>
+      <span class="chip">🚗 Start: Pec pod Sněžkou</span>
+    </div>
+    <div class="body-text">
+      <p>Méně frekventované sesterské údolí vedle Obřího. Trasa klidným údolím pod Luční a Studniční horou k <strong>Richterovým boudám</strong> a dál na <strong>Výrovku</strong> — horská chata pod hřebenem. Silný krkonošský vibe bez davů. Dobrá lehčí varianta nebo doplněk.</p>
+    </div>
+    <div class="note note-green">☕ Výrovka = ranní kafe s výhledem před sestupem. Nezapomenout.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SOBOTA
+═══════════════════════════════════════════════════ -->
+<div id="tab-saturday" class="tab-pane">
+  <div class="day-hdr">
+    <h2>Sobota 31. května</h2>
+    <div class="day-sub">Ubytování OREA Horal · ráno i odpoledne k dispozici</div>
+    <div class="banner banner-rain">🌧️ 70% srážky — hřebeny nevhodné. Plánujte nižší polohy, kratší vzdálenosti nebo vnitřní program.</div>
+  </div>
+
+  <div class="sec-label">★ Nejlepší deštivá varianta</div>
+
+  <!-- Kamieńczyk -->
+  <div class="card rain-opt">
+    <div class="card-head">
+      <div class="rank-badge rw">1</div>
+      <div class="card-titles">
+        <h3>Wąwóz Kamieńczyka — soutěska s helmou</h3>
+        <div class="csub">Szklarska Poręba (PL) · 50 min autem přes Harrachov</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~4 km</span>
+      <span class="chip">⬆️ ~200 m</span>
+      <span class="chip">⏱ 2–3 h</span>
+      <span class="chip">🟢 Snadná</span>
+      <span class="chip">⛑️ Helma u vstupu povinná</span>
+    </div>
+    <div class="body-text">
+      <p>Skalní kaňon, na jehož konci padá <strong>27m vodopád Kamieńczyka</strong> — největší v polských Krkonoších. Soutěska je tak úzká, že na vyhlídkových roštech nad vodou dostanete helmu. V dešti a mlze atmosféra jako z Pána prstenů — tohle je jedno z těch míst, které je za špatného počasí lepší než za pěkného.</p>
+    </div>
+    <div class="note note-blue">🐟 Hned za hranicí jsou skvělé polské <em>smażalnie ryb</em> (pečený pstruh, kapr) + kyselá polévka <em>Żurek</em> — ideální upršený oběd. Szklarska Poręba má hezké centrum a kavárny.</div>
+  </div>
+
+  <div class="sec-label">Alternativy blízko Špindlu</div>
+
+  <!-- Čertova strouha -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge r2">2</div>
+      <div class="card-titles">
+        <h3>Bílé Labe + Čertova strouha</h3>
+        <div class="csub">Přímo ze Špindlu · les, kaskády, únikové varianty kdykoliv</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 6–10 km</span>
+      <span class="chip">⬆️ ~300 m</span>
+      <span class="chip">⏱ 2–3 h</span>
+      <span class="chip">🟢 Snadná</span>
+    </div>
+    <div class="body-text">
+      <p>Čertova strouha začíná kousek nad Boudou u Bílého Labe — vede lesní roklí ke zbytkům staré kovárny, napojení na <strong>Erlebachovu boudu</strong> (odkud jede bus zpět do Špindlu). Typ trasy, která v dešti nevadí: voda, les, kaskády. Lze kdykoliv zkrátit nebo otočit.</p>
+    </div>
+  </div>
+
+  <!-- Wellness -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge rs">W</div>
+      <div class="card-titles">
+        <h3>Wellness den v OREA Horalu</h3>
+        <div class="csub">Zasloužené zotavení po pátečních 22 km</div>
+      </div>
+    </div>
+    <div class="body-text">
+      <p>Po výkonu z pátku to tělo ocení. OREA Horal má bazén + wellness centrum — sobota za deště je na toto stvořená. Žádná povinnost nic dokazovat.</p>
+    </div>
+    <div class="note note-green">💆 Série hike + wellness je skvělá kombinace víkendu v horách.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NEDĚLE
+═══════════════════════════════════════════════════ -->
+<div id="tab-sunday" class="tab-pane">
+  <div class="day-hdr">
+    <h2>Neděle 1. června</h2>
+    <div class="day-sub">Ráno hike · dopoledne odjezd domů</div>
+    <div class="banner banner-ok">🌤️ Slušné počasí, jen 10% srážek. Ideální na ranní výlet přímo od hotelu.</div>
+  </div>
+
+  <div class="sec-label">★ Ranní výlet před odjezdem</div>
+
+  <!-- Dlouhý důl -->
+  <div class="card top">
+    <div class="card-head">
+      <div class="rank-badge r1">1</div>
+      <div class="card-titles">
+        <h3>Dlouhý důl</h3>
+        <div class="csub">Přímo od hotelu · divočejší než Bílé Labe · skoro žádní turisté</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~10 km</span>
+      <span class="chip">⬆️ ~450 m</span>
+      <span class="chip">⏱ 2.5–3.5 h</span>
+      <span class="chip">🟡 Střední</span>
+      <span class="chip">🚶 Start: OREA Horal — pěšky</span>
+    </div>
+    <div class="body-text">
+      <p>Málokdo sem chodí — všichni míří na Bílé Labe. Cesta vede divokým údolím podél strmých lavinových svahů Kozích hřbetů, stoupáte podél potoka až k <strong>Výrovce</strong>. Poctivý ranní trénink, žádné davy, čistý přírodní charakter. Sestup stejnou cestou, pak odjezd z hotelu.</p>
+    </div>
+    <div class="note note-green">☕ Ranní kafe na Výrovce a pak sestup zpět — ideální tečka za výletem.</div>
+  </div>
+
+  <!-- Medvědín -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank-badge r2">2</div>
+      <div class="card-titles">
+        <h3>Medvědín (1 235 m)</h3>
+        <div class="csub">Ze Špindlu pěšky · výhled na celé údolí</div>
+      </div>
+    </div>
+    <div class="stats">
+      <span class="chip">📏 ~6 km</span>
+      <span class="chip">⬆️ ~380 m</span>
+      <span class="chip">⏱ 1.5–2 h</span>
+      <span class="chip">🟢 Snadná</span>
+    </div>
+    <div class="body-text">
+      <p>Lehčí výstup ze Špindlu přímo po červené značce. Na vrcholu panoramatický výhled na Špindlerovo Údolí, Kozí hřbety a přilehlé hřebeny. V létě bez lyžařů tichá a klidná lokalita. Dobrá varianta pokud chcete kratší nebo nenáročnější neděli.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TIPY
+═══════════════════════════════════════════════════ -->
+<div id="tab-tips" class="tab-pane">
+  <div class="day-hdr">
+    <h2>Praktické tipy</h2>
+    <div class="day-sub">Vše co potřebujete vědět před odjezdem</div>
+  </div>
+
+  <div class="sec-label">Parkování</div>
+  <div class="card">
+    <ul class="steps">
+      <li><strong>Pec pod Sněžkou</strong> — parkoviště u lanovky nebo u vjezdu do Obřího dolu. Ráno se plní rychle — dorazte do 8:00 nebo hned po příjezdu.</li>
+      <li><strong>Horní Malá Úpa / Pomezní boudy</strong> — výchozí bod pro Svorovou horu. Malé P, přijíždějte brzy.</li>
+      <li><strong>Szklarska Poręba (PL)</strong> — parkoviště u vodopádu Kamieńczyka nebo u lanovky na Szrenici. ~15–20 PLN/den.</li>
+      <li><strong>Žacléř</strong> — výchozí bod pro Rýchory. Parkování zdarma u obce.</li>
+      <li><strong>OREA Horal</strong> — hotel má vlastní parkoviště pro hosty.</li>
+    </ul>
+  </div>
+
+  <div class="sec-label">Boudy &amp; jídlo</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>🏔 Boudy</h4>
+      <ul>
+        <li><strong>Jelenka</strong> — borůvkový koláč + pivo · must-have</li>
+        <li><strong>Samotnia</strong> (PL) — historická bouda u ledovcového jezera</li>
+        <li><strong>Slezský dům</strong> — na hranici, jídlo, výhled</li>
+        <li><strong>Strzecha Akademicka</strong> (PL) — pod Sněžkou z PL strany</li>
+        <li><strong>Výrovka</strong> — kafe pod hřebenem</li>
+        <li><strong>Erlebachova bouda</strong> — u Bílého Labe, bus zpět</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <h4>🐟 Polská strana</h4>
+      <ul>
+        <li><strong>Smażalnia ryb</strong> — grilovaný pstruh/kapr u hranic</li>
+        <li><strong>Żurek</strong> — kyselá polévka, ideální v dešti</li>
+        <li><strong>Szklarska Poręba</strong> — hezké centrum, kavárny</li>
+        <li><strong>Karpacz</strong> — větší město pod PL Sněžkou</li>
+        <li><strong>Wang</strong> — norský dřevěný kostel v Karpaczi</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Výhledy &amp; zajímavosti</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>🔭 Výhledy</h4>
+      <ul>
+        <li><strong>Słonecznik</strong> — žulový obelisk na PL hřebeni, výhled na Karpacz</li>
+        <li><strong>Obří sedlo</strong> — panorama na Sněžku + celý Obří důl</li>
+        <li><strong>Svorová hora</strong> — dolů do kotliny Karpacze</li>
+        <li><strong>Medvědín</strong> — výhled na Špindl a celé údolí</li>
+        <li><strong>Śnieżne Kotły</strong> — ledovcové kotle viditelné z hřebene (PL)</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <h4>⚠️ Na co si dát pozor</h4>
+      <ul>
+        <li>Sezónní uzavírky PL tras do 31.5. — ověřit na místě</li>
+        <li>Počasí v horách se mění rychle — vždy větrovka + vrstva</li>
+        <li>Obří důl + Samotnia — kamenité, mokré. Gripy nutnost.</li>
+        <li>Voda — nosit 1.5–2 l, studánky nejsou vždy dostupné</li>
+        <li>Hranice CZ/PL volně průchozí — mít doklady</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Aplikace &amp; mapy</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>📱 Offline mapy</h4>
+      <ul>
+        <li><strong>Mapy.cz</strong> — nejlepší pro Krkonoše (stáhnout offline!)</li>
+        <li><strong>OsmAnd</strong> — alternativa, funguje offline</li>
+        <li><strong>Mapa turystyczna</strong> (PL) — pro polskou stranu</li>
+        <li>Signál na hřebenech slabý — stáhnout předem</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <h4>💡 Různé</h4>
+      <ul>
+        <li>Vstupné NP Karkonoszy: ~15–20 PLN/os.</li>
+        <li>Lanovka Szrenica (Szklarska) — záloha cesty nahoru</li>
+        <li>Kurz PLN: 1 PLN ≈ 5.7 CZK</li>
+        <li>Bus z Erlebachovy boudy zpět do Špindlu — záchrana při dešti</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Logistika celého víkendu</div>
+  <div class="logistics">
+    <h4>Plán na 3 dny</h4>
+    <div class="log-day">
+      <div class="log-dot"></div>
+      <div>
+        <strong>Pátek 30/5 — celý den hike</strong>
+        Praha → Pec pod Sněžkou (1.5 h) → velký páteční hike (Obří důl / Svorová / Rýchory) → večer přejet do Špindlu (45 min z Pece) → hotel Horal, zasloužená večeře.
+      </div>
+    </div>
+    <div class="log-day">
+      <div class="log-dot"></div>
+      <div>
+        <strong>Sobota 31/5 — deštivý den</strong>
+        Ráno: Szklarska Poręba (50 min, soutěska Kamieńczyka + pstruhy) nebo Čertova strouha ze Špindlu → odpoledne: wellness v Horalu.
+      </div>
+    </div>
+    <div class="log-day">
+      <div class="log-dot"></div>
+      <div>
+        <strong>Neděle 1/6 — ranní výlet + odjezd</strong>
+        Dlouhý důl přímo od hotelu (2.5–3 h) → snídaně → odjezd Praha.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Špindl Trail Guide · 30.5–1.6.2026 · sestaveno s&nbsp;Claudem · trasy ověřte na Mapy.cz</footer>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
