@@ -502,7 +502,32 @@
       width: 100%;
       border-radius: 10px;
       opacity: .9;
+      cursor: zoom-in;
+      transition: opacity .2s;
     }
+    .faq-parking-gif:hover { opacity: 1; }
+    /* lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(20,10,20,.88);
+      justify-content: center; align-items: center;
+      padding: 1.5rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%; max-height: 90dvh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: fixed; top: 1.2rem; right: 1.4rem;
+      background: none; border: none;
+      color: #fff; font-size: 2.2rem; line-height: 1;
+      cursor: pointer; opacity: .8;
+      transition: opacity .2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
     .faq-pool {
       margin-top: .8rem;
       width: 100%; max-width: 320px;
@@ -607,7 +632,7 @@
       <p class="dresscode-text reveal d1">
         Pokud se s námi budete chtít sladit, naše svatba se ponese v těchto barvách.
         Hlavní ale je, abyste přišli v tom, v čem se budete cítit dobře 😊<br>
-        Počítejte s tím, že obřad bude venku na trávníku, takže jehlové podpatky asi nebudou úplně praktická volba.
+        Počítejte s tím, že obřad bude venku na trávníku, takže vysoké podpatky asi nebudou úplně praktická volba.
       </p>
       <div class="color-palette reveal d2">
         <div class="color-swatch" style="background:#F4AD73"></div>
@@ -687,14 +712,12 @@
           </div>
         </div>
 
-        <hr class="faq-divider" />
-
         <div class="faq-item full reveal">
           <div class="faq-q">Parkování</div>
           <div class="faq-a">
             Kapacita parkoviště by měla být dostatečná pro všechny svatebčany. Na parkoviště dojedete tudy:
           </div>
-          <img src="parkovani_animace.gif" alt="Trasa na parkoviště" class="faq-parking-gif reveal d1" loading="lazy" />
+          <img src="parkovani_animace.gif" alt="Trasa na parkoviště" class="faq-parking-gif reveal d1" loading="lazy" id="parkingGif" />
         </div>
 
       </div>
@@ -718,6 +741,12 @@
   <section class="closing">
     <div class="closing-script reveal">Těšíme se <em>na vás</em></div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&#x2715;</button>
+    <img src="" alt="" id="lightboxImg" />
+  </div>
 
   <div class="footer-stripe"></div>
   <footer>
@@ -784,6 +813,22 @@
       document.getElementById('cd-s').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
     }
     tick(); setInterval(tick, 1000);
+
+    // ── LIGHTBOX
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.getElementById('parkingGif').addEventListener('click', () => {
+      lightboxImg.src = 'parkovani_animace.gif';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 
 </body>
