@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simona & Jakub — 29. 8. 2026</title>
+  <title>Simona & Jakub - 29. 8. 2026</title>
   <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -495,6 +495,8 @@
       font-size: clamp(.95rem, 2.2vw, 1.05rem);
       color: var(--muted); line-height: 1.75;
     }
+    .faq-a a { color: var(--p3); }
+    .faq-a a:hover { opacity: .75; }
     .faq-pool {
       margin-top: .8rem;
       width: 100%; max-width: 320px;
@@ -549,10 +551,10 @@
   <nav id="nav">
     <a href="#hero" class="nav-mono">S <em>&amp;</em> J</a>
     <div class="nav-links">
-      <a href="#program">Program</a>
+      <a href="#program">Harmonogram</a>
       <a href="#dresscode">Dress code</a>
       <a href="#misto">Místo</a>
-      <a href="#rsvp">RSVP</a>
+      <a href="#dotaznik">Dotazník</a>
       <a href="#faq">FAQ</a>
     </div>
   </nav>
@@ -599,7 +601,8 @@
       <span class="section-label reveal">Dress code</span>
       <p class="dresscode-text reveal d1">
         Pokud se s námi budete chtít sladit, naše svatba se ponese v těchto barvách.
-        Hlavní ale je, abyste přišli v tom, v čem se budete cítit dobře 😊
+        Hlavní ale je, abyste přišli v tom, v čem se budete cítit dobře 😊<br>
+        Počítejte s tím, že obřad bude venku na trávníku, takže jehlové podpatky asi nebudou úplně praktická volba.
       </p>
       <div class="color-palette reveal d2">
         <div class="color-swatch" style="background:#F4AD73"></div>
@@ -625,7 +628,7 @@
             <small style="font-size:.95rem;font-style:normal;letter-spacing:.5px;">GPS: 50.5127178°N, 14.6639336°E</small>
           </div>
           <div class="venue-tip">
-            Pro svatebčany přijíždějící směrem z Prahy doporučujeme jet přes Mladou Boleslav a poté okolo Bezdězu.
+            Svatebčanům přijíždějícím směrem z Prahy doporučujeme jet přes Mladou Boleslav a poté okolo Bezdězu.
           </div>
           <div class="venue-buttons">
             <a class="btn btn-primary" href="https://maps.app.goo.gl/iCYkm5bh4yBuxfc97" target="_blank" rel="noopener">Google Mapy</a>
@@ -643,23 +646,6 @@
     </div>
   </section>
 
-  <!-- RSVP -->
-  <section id="rsvp">
-    <div class="container">
-      <span class="section-label reveal">Jídlo & pití</span>
-      <h2 class="section-title reveal d1">Dejte nám vědět</h2>
-      <p class="rsvp-text reveal d2">
-        Abychom pro vás mohli vše dobře připravit, poprosili bychom vás o vyplnění
-        krátkého formuláře ohledně jídla a pití. Zabere to jen pár minut.
-      </p>
-      <div class="reveal d3">
-        <a class="btn-rsvp" href="https://forms.gle/QNRYyigz17VL1iP69" target="_blank" rel="noopener">
-          Vyplnit formulář →
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section id="faq">
     <div class="container">
@@ -669,48 +655,41 @@
       <div class="faq-grid">
 
         <div class="faq-item reveal">
-          <div class="faq-q">Co si vzít na sebe?</div>
+          <div class="faq-q">Bazén</div>
           <div class="faq-a">
-            Ideálně společenské oblečení — ale hlavně se v tom musíte cítit dobře.
-            Počítejte s tím, že obřad bude venku na trávníku,
-            takže vysoké podpatky asi nebudou úplně praktická volba.
+            V areálu je k dispozici bazén. Pokud se budete chtít zchladit, plavky s sebou!
           </div>
+          <img src="bazen.png" alt="Bazén v areálu Chmelnice Luka" class="faq-pool reveal d1" loading="lazy" />
         </div>
 
         <div class="faq-item reveal d1">
           <div class="faq-q">Parkování</div>
           <div class="faq-a">
-            S parkováním si hlavu nelamte — míst je dost.
+            Kapacita parkoviště by měla být dostatečná pro všechny svatebčany. Na parkoviště dojedete tudy:
           </div>
         </div>
 
         <div class="faq-item reveal d2">
-          <div class="faq-q">Co s sebou?</div>
-          <div class="faq-a">
-            Jestli máte chuť se osvěžit, vezměte si plavky — v areálu je bazén.
-          </div>
-          <img src="bazen.png" alt="Bazén v areálu Chmelnice Luka" class="faq-pool reveal d3" loading="lazy" />
-        </div>
-
-        <div class="faq-item reveal d1">
           <div class="faq-q">Dary</div>
           <div class="faq-a">
-            Pokud nás chcete obdarovat, potěší nás finanční dar.
+            Největším darem pro nás bude, když tento den strávíte s námi. Pokud byste nás chtěli i tak obdarovat, budeme rádi za finanční příspěvek na společný život.
+          </div>
+        </div>
+
+        <div class="faq-item reveal d1" id="dotaznik">
+          <div class="faq-q">Dotazník</div>
+          <div class="faq-a">
+            Chcete nám něco vzkázat? Máte nějakou preferenci pití? Jaká písnička vás dostane na parket? Dejte nám vědět <a href="https://forms.gle/y5HSnyk9S7sh9UH16" target="_blank" rel="noopener">zde</a>.
           </div>
         </div>
 
         <hr class="faq-divider" />
 
         <div class="faq-item full reveal">
-          <div class="faq-note">
-            <p>📵 Budeme moc rádi, když si při obřadu mobily schováte — máme fotografa i kameramana, kteří vše krásně zachytí za vás.</p>
-            <p>🗓 Kdyby se vám cokoliv změnilo a nemohli přijet, moc nás to mrzí — ale budeme rádi, když nám to dáte co nejdříve vědět.</p>
+          <div class="faq-q">Focení během obřadu</div>
+          <div class="faq-a">
+            Budeme moc rádi, když si obřad užijete naplno s námi a mobily necháte schované.
           </div>
-        </div>
-
-        <div class="faq-item full reveal d1">
-          <div class="faq-q">Máte jiný dotaz?</div>
-          <div class="faq-a">Neváhejte se ozvat — rádi odpovíme.</div>
         </div>
 
       </div>
