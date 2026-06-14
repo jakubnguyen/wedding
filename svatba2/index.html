@@ -504,15 +504,16 @@
     }
     .faq-a a { color: var(--p3); }
     .faq-a a:hover { opacity: .75; }
-    .faq-parking-gif {
+    .faq-parking-video {
       margin-top: .8rem;
       width: 100%;
       border-radius: 10px;
       opacity: .9;
       cursor: zoom-in;
       transition: opacity .2s;
+      display: block;
     }
-    .faq-parking-gif:hover { opacity: 1; }
+    .faq-parking-video:hover { opacity: 1; }
     /* lightbox */
     .lightbox {
       display: none;
@@ -522,10 +523,9 @@
       padding: 1.5rem;
     }
     .lightbox.open { display: flex; }
-    .lightbox img {
+    .lightbox video {
       max-width: 100%; max-height: 90dvh;
       border-radius: 10px;
-      object-fit: contain;
     }
     .lightbox-close {
       position: fixed; top: 1.2rem; right: 1.4rem;
@@ -724,7 +724,8 @@
           <div class="faq-a">
             Kapacita parkoviště by měla být dostatečná pro všechny svatebčany. Na parkoviště dojedete tudy:
           </div>
-          <img src="parkovani_animace.gif" alt="Trasa na parkoviště" class="faq-parking-gif reveal d1" loading="lazy" id="parkingGif" />
+          <video src="parkovani.mp4" class="faq-parking-video reveal d1" id="parkingVideo"
+            autoplay loop muted playsinline></video>
         </div>
 
       </div>
@@ -752,7 +753,7 @@
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">&#x2715;</button>
-    <img src="" alt="" id="lightboxImg" />
+    <video id="lightboxVideo" autoplay loop muted playsinline></video>
   </div>
 
   <div class="footer-stripe"></div>
@@ -823,14 +824,15 @@
 
     // ── LIGHTBOX
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    document.getElementById('parkingGif').addEventListener('click', () => {
-      lightboxImg.src = 'parkovani_animace.gif';
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    document.getElementById('parkingVideo').addEventListener('click', () => {
+      lightboxVideo.src = 'parkovani.mp4';
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
     function closeLightbox() {
       lightbox.classList.remove('open');
+      lightboxVideo.src = '';
       document.body.style.overflow = '';
     }
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
